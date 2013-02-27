@@ -1,0 +1,7 @@
+# List of Mobs
+# ID - HP - ATK - DFS - GOLD - UNIQUE? - NAME
+0 1 1 0 0 0 a mopit
+1 1 1 1 2 0 a scrawny orc
+2 3 2 2 3 0 a frail skeleton
+3 5 3 2 2 0 a garden snake
+4 7 4 3 5 0 a snickering snick
