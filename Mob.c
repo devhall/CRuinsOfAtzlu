@@ -20,10 +20,6 @@ void generate_mobs_from_file(Mob* mobs)
         }
         else
         {  
-            
-            /* Allocate some mem for the struct in array */
-           // mobs[i] = (Mob*)malloc(sizeof(Mob)); 
-            
             /* parse line buffer into mob struct */
             sscanf(line, "%d %d %d %d %d %d %[^\n]s", &mobs[i].id, &mobs[i].max_hp, &mobs[i].atk, &mobs[i].dfs, &mobs[i].gold, &mobs[i].unique, mobs[i].name);
            

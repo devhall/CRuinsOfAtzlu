@@ -43,6 +43,8 @@ int get_user_char(char* user_input)
     return user_char;
 }
 
+/* returns random int 
+   from: http://stackoverflow.com/questions/2999075/generate-a-random-number-within-range/2999130#2999130 */
 int get_random_int(int limit)
 {
     int divisor = RAND_MAX / (limit + 1);
@@ -201,6 +203,7 @@ int main()
             break;
         case 'q':
             game_is_running = 0;
+            free(p_hero);
             printf("\nGoodbye!\n");
             break;
         default:
