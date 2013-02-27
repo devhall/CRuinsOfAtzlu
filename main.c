@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <memory.h>
+#include <time.h>
+#include <stdlib.h>
 #include "Inventory.h"
 #include "Hero.h"
 #include "Mob.h"
@@ -28,7 +29,7 @@ void get_user_input(char* user_input)
     fgets(user_input, BUFSIZ, stdin);
 }
 
-// This strips the first char from user input
+/* This strips the first char from user input */
 int get_user_char(char* user_input)
 {
     int user_char;
@@ -36,11 +37,23 @@ int get_user_char(char* user_input)
     user_char = user_input[0];
     if (isdigit(user_char))
     {
-        // convert char to digit
+        /* convert char to digit */
         user_char -= '0';
     }
-
     return user_char;
+}
+
+int get_random_int(int limit)
+{
+    int divisor = RAND_MAX / (limit + 1);
+    int rv;
+    
+    do
+    {
+        rv = rand() / divisor;
+    } while (rv > limit);
+    
+    return rv;
 }
 
 void display_intro()
@@ -70,14 +83,14 @@ void display_game_menu()
     printf("q - Quit\n\n");
 }
 
-void load_resources(Mob** list)
+void load_resources(Mob* list)
 {
     generate_mobs_from_file(list);
 }
 
 void start_game(Hero* h)
 {
-    Mob* mobs_list[NUM_MOBS];
+    Mob* mobs_list = (Mob*)malloc(sizeof(Mob) * NUM_MOBS);
     Hero* the_hero = h;
     int game_running;
     load_resources(mobs_list);
@@ -105,6 +118,10 @@ void start_game(Hero* h)
         case 2:
             printf("\nFighting random battle\n");
             /* TODO: Add random battle functionality here */
+            wait(1);
+            int rand = get_random_int(NUM_MOBS - 1);
+            printf("\nYou might encounter: %s\n", mobs_list[rand].name);
+            
             break;
         case 3:
             printf("\nEntering Town of Korith\n");
@@ -122,6 +139,7 @@ void start_game(Hero* h)
             break;
         case 'q':
             game_running = 0;
+            free(mobs_list);
             break;
         default:
             printf("\nThat's a non-answer. Please try again.\n");

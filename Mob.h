@@ -18,6 +18,6 @@ typedef struct Mob{
 } Mob;
 
 /* Generates an array of mobs */
-void generate_mobs_from_file(Mob** mobs);
+void generate_mobs_from_file(Mob* mobs);
 
 #endif
