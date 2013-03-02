@@ -1,7 +1,7 @@
 #ifndef MOB_H
 #define MOB_H
 
-#define NUM_MOBS    5
+#define NUM_MOBS    6
 
 #include <stdio.h>
 #include <stdlib.h>

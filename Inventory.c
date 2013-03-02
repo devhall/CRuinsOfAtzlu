@@ -152,7 +152,7 @@ Item* load_inv_from_file()
             }
 
             /* parse line buffer into item struct */
-            sscanf(line, "%d %d %d %d %[^\n]s", &itm->id, &itm->value, &itm->qty, &itm->unique, &itm->name);
+            sscanf(line, "%d %d %d %d %[^\n]s", &itm->id, &itm->value, &itm->qty, &itm->unique, itm->name);
 
             /* first time through, set head to initial item */
             if (NULL == head)

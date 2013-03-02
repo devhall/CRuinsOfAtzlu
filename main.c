@@ -1,62 +1,12 @@
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
-#include <time.h>
+
 #include <stdlib.h>
 #include "Inventory.h"
 #include "Hero.h"
 #include "Mob.h"
-
-
-#ifdef _WIN32
-    #include <Windows.h>
-#else
-    #include <unistd.h>
-#endif
-
-
-void wait(int seconds)
-{
-#ifdef _WIN32
-    Sleep(1000 * seconds);
-#else
-    sleep(seconds);
-#endif
-}
-
-void get_user_input(char* user_input)
-{
-    fgets(user_input, BUFSIZ, stdin);
-}
-
-/* This strips the first char from user input */
-int get_user_char(char* user_input)
-{
-    int user_char;
-    fgets(user_input, BUFSIZ, stdin);
-    user_char = user_input[0];
-    if (isdigit(user_char))
-    {
-        /* convert char to digit */
-        user_char -= '0';
-    }
-    return user_char;
-}
-
-/* returns random int 
-   from: http://stackoverflow.com/questions/2999075/generate-a-random-number-within-range/2999130#2999130 */
-int get_random_int(int limit)
-{
-    int divisor = RAND_MAX / (limit + 1);
-    int rv;
-    
-    do
-    {
-        rv = rand() / divisor;
-    } while (rv > limit);
-    
-    return rv;
-}
+#include "Combat.h"
+#include "utils.h"
 
 void display_intro()
 {
@@ -118,12 +68,13 @@ void start_game(Hero* h)
             /* TODO: Add "Exploring" functionality here */
             break;
         case 2:
-            printf("\nFighting random battle\n");
+            /* printf("\nFighting random battle\n"); */
             /* TODO: Add random battle functionality here */
             wait(1);
             int rand = get_random_int(NUM_MOBS - 1);
-            printf("\nYou might encounter: %s\n", mobs_list[rand].name);
+            /* run battle */
             
+            battle(h, mobs_list[rand]);
             break;
         case 3:
             printf("\nEntering Town of Korith\n");
