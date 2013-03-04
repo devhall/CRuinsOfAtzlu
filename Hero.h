@@ -11,6 +11,7 @@ typedef struct Hero{
     int atk;
     int dfs;
     int gold;
+    int is_alive;
     Item* inv;
 } Hero;
 

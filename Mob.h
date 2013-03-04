@@ -1,7 +1,7 @@
 #ifndef MOB_H
 #define MOB_H
 
-#define NUM_MOBS    6
+#define NUM_MOBS    7
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,6 +15,7 @@ typedef struct Mob{
     int dfs;
     int gold;
     int unique;
+    int is_alive;
 } Mob;
 
 /* Generates an array of mobs */

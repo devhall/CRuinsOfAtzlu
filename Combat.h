@@ -18,7 +18,12 @@
 void battle(Hero* h, Mob the_mob);
 
 /* process one round of battle */
-void process_battle_rnd(Hero* h, Mob* m);
+void process_battle_rnd(Hero* h, Mob* m, int hero_is_attacker);
+
+/* checks if attacker hits - uses flag 'hero_is_attacker' 
+ * if hero is attacking, otherwise '0' if enemy is attacking
+ * - returns true or false */
+int check_for_hit(Hero* h, Mob* m, int hero_is_attacker);
 
 #endif	/* COMBAT_H */
 

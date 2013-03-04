@@ -43,7 +43,6 @@ void load_resources(Mob* list)
 void start_game(Hero* h)
 {
     Mob* mobs_list = (Mob*)malloc(sizeof(Mob) * NUM_MOBS);
-    Hero* the_hero = h;
     int game_running;
     load_resources(mobs_list);
     
@@ -68,27 +67,45 @@ void start_game(Hero* h)
             /* TODO: Add "Exploring" functionality here */
             break;
         case 2:
-            /* printf("\nFighting random battle\n"); */
-            /* TODO: Add random battle functionality here */
-            wait(1);
-            int rand = get_random_int(NUM_MOBS - 1);
-            /* run battle */
-            
-            battle(h, mobs_list[rand]);
+            /* check to see if hero is alive */
+            if (h->is_alive)
+            {
+                wait(1);
+                int rand = get_random_int(NUM_MOBS - 1);
+                /* run battle */
+                battle(h, mobs_list[rand]);
+            }
+            else
+            {
+                printf("\nIt appears you need to be revived first.\n");
+            }
             break;
         case 3:
             printf("\nEntering Town of Korith\n");
             /* TODO: Add town functionality here */
             break;
         case 4:
-            printf("\nResting\n");
-            /* TODO: Add rest functionality here */
+            printf("\nResting");
+            /* TODO: Make this more nuanced */
+            while (h->cur_hp < h->max_hp)
+            {
+                printf(".");
+                wait(1);
+                h->cur_hp += 1;
+            }
+            if (h->cur_hp > h->max_hp)
+            {
+                h->cur_hp = h->max_hp;
+            }
+            h->is_alive = 1;
+            printf("\nYou feel well rested!\n");
+            wait(1);
             break;
         case 5:
             printf("\nDisplaying status\n");
             /* TODO: Add player status display functionality here */
             /* For now, displaying inventory */
-            display_inventory(the_hero->inv);
+            display_inventory(h->inv);
             break;
         case 'q':
             game_running = 0;
